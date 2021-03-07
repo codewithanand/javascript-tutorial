@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filling in a Guest List</title>
+</head>
+<body>
+    <p class="admitted">Admit: </p>
+    <p class="refused">Refuse: </p>
+
+    <!-- Javascript here -->
+    <script>
+        let people = ['Chris', 'Anne', 'Colin', 'Terri', 'Phil', 'Lola', 'Sam', 'Kay', 'Bruce'];
+        let admitted = document.querySelector('.admitted');
+        let refused = document.querySelector('.refused');
+
+        for(let i=0; i<people.length; i++){
+            if(people[i].toLowerCase() === 'lola' || people[i].toLowerCase() === 'phil'){
+                refused.textContent += people[i] + ', ';
+            }
+            else{
+                admitted.textContent += people[i] + ', ';
+            }
+        }
+    </script>
+</body>
+</html>

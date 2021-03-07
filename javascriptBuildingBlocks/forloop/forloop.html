@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Loop</title>
+</head>
+<body>
+    <label for="name">Search by contact name: </label>
+    <input type="text" id="name">
+    <button id="search">Search</button>
+    <p></p>
+
+    <!-- Javascript here -->
+    <script>
+        let contacts = ['Chris:2232322','Sarah:3453456','Bill:7654322','Mary:9998769','Dianne:938975'];
+        let para = document.querySelector('p');
+        let input = document.querySelector('input');
+        let search = document.querySelector('button');
+
+        search.onclick = function(){
+            let searchName = input.value.toLowerCase();
+            input.value = '';
+            input.focus();
+            for(let i=0; i<contacts.length; i++){
+                let splitContact = contacts[i].split(':');
+                let contactName = splitContact[0].toLowerCase();
+                if(searchName === contactName){
+                    para.textContent = splitContact[0] + '\'s number is: ' + splitContact[1];
+                    break;
+                }
+                else if(i === contacts.length-1){
+                    para.textContent = 'Contact not found'
+                }
+            }
+        }
+    </script>
+    
+</body>
+</html>
