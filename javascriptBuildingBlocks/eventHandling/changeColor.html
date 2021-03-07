@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling - Change Background Color</title>
+</head>
+<body>
+    <button>Change background color</button>
+    <p></p>
+
+    <!-- Javascript here -->
+    <script>
+        let btn = document.querySelector('button');
+        let bg = document.querySelector('html');
+        let para = document.querySelector('p');
+
+        function randomColor(number){
+            return Math.floor(Math.random() * (number+1));
+
+            // Math.random returns random number betwee 0 and 1
+            // Math.floor returns whole number
+        }
+
+        btn.onclick = function(){               //onclick is event handler
+            let rndColor = 'rgb(' + randomColor(255)+','+randomColor(255)+','+randomColor(255) + ')';
+            bg.style.backgroundColor = rndColor;
+            para.textContent = 'Color code: ' +  rndColor;  //this is optional
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handler Properties</title>
+
+    <style>
+        h1{
+            text-align: center;
+        }
+        .container{
+            display: flex;
+        }
+        .click, .focus, .blur, .dblclick, .mouseover, .mouseout{
+            width: 200px;
+            margin: 5px;
+            padding: 10px 10px 10px 10px;
+            border-radius: 10px;
+            border: 2px solid;
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Event Handler Properties</h1>
+    <div class="container">
+        <div class="click">
+            <h2>onclick</h2>
+            <p>Background color changes on clicking this button</p>
+            <button id="click">Click me</button>
+        </div>
+        <div class="focus">
+            <h2>onfocus</h2>
+            <p>Background color changes on focusing this button</p>
+            <button id="focus">Focus here</button>
+        </div>
+        <div class="blur">
+            <h2>onblur</h2>
+            <p>Background color changes on blur this button</p>
+            <button id="blur">Blur</button>
+        </div>
+        <div class="dblclick">
+            <h2>ondblclick</h2>
+            <p>Background color changes on double clicking this button</p>
+            <button id="dblclick">Double Click me</button>
+        </div>
+        <div class="mouseover">
+            <h2>onmouseover</h2>
+            <p>Background color changes on mouse over this button</p>
+            <button id="mouseover">Hover in</button>
+        </div>
+        <div class="mouseout">
+            <h2>onmouseout</h2>
+            <p>Background color changes on mouse over out this button</p>
+            <button id="mouseout">Hover out</button>
+        </div>
+    </div>
+    
+
+    <!-- Javascript here -->
+    <script>
+        let clickBtn = document.querySelector('#click');
+        let clickBg = document.querySelector('.click');
+        let focusBtn = document.querySelector('#focus');
+        let focusBg = document.querySelector('.focus');
+        let blurBtn = document.querySelector('#blur');
+        let blurBg = document.querySelector('.blur');
+        let dblclickBtn = document.querySelector('#dblclick');
+        let dblclickBg = document.querySelector('.dblclick');
+        let mouseOverBtn = document.querySelector('#mouseover');
+        let mouseOverBg = document.querySelector('.mouseover');
+        let mouseOutBtn = document.querySelector('#mouseout');
+        let mouseOutBg = document.querySelector('.mouseout');
+
+        function randomColor(number){
+            let r = Math.floor(Math.random() * (number+1));
+            let g = Math.floor(Math.random() * (number+1));
+            let b = Math.floor(Math.random() * (number+1));
+            let rndColor = 'rgb(' + r +','+ g +','+ b + ')';
+            return rndColor;
+
+        }
+
+        clickBtn.onclick = function(){ clickBg.style.backgroundColor = randomColor(255);}
+        focusBtn.onfocus = function(){ focusBg.style.backgroundColor = randomColor(255);}
+        blurBtn.onblur = function(){ blurBg.style.backgroundColor = randomColor(255);}
+        dblclickBtn.ondblclick = function(){ dblclickBg.style.backgroundColor = randomColor(255);}
+        mouseOverBtn.onmouseover = function(){ mouseOverBg.style.backgroundColor = randomColor(255);}
+        mouseOutBtn.onmouseout = function(){ mouseOutBg.style.backgroundColor = randomColor(255);}
+
+    </script>
+</body>
+</html>
