@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Basics</title>
+
+    <style>
+        
+    </style>
+</head>
+<body>
+    
+    <h1>Object Basics</h1>
+    <p>
+        An object is a collection of related data and/or functionality (which usually consists of several variables and functions — which are called properties and methods when they are inside objects.)
+    </p>
+    <p>
+        Well, an object is made up of multiple members, each of which has a name (e.g. name and age above), and a value (e.g. ['Bob', 'Smith'] and 32). Each name/value pair must be separated by a comma, and the name and value in each case are separated by a colon. The syntax always follows this pattern:
+    </p>
+    <p>
+        const objectName = { <br>
+            member1Name: member1Value, <br>
+            member2Name: member2Value, <br>
+            member3Name: member3Value <br>
+        };
+    </p>
+    <p>
+        The value of an object member can be pretty much anything — in our person object we've got a string, a number, two arrays, and two functions. The first four items are data items, and are referred to as the object's properties. The last two items are functions that allow the object to do something with that data, and are referred to as the object's methods.
+    </p>
+    <p>
+        An object like this is referred to as an object literal — we've literally written out the object contents as we've come to create it. This is in contrast to objects instantiated from classes, which we'll look at later on.
+    </p>
+    <p>
+        It is very common to create an object using an object literal when you want to transfer a series of structured, related data items in some manner, for example sending a request to the server to be put into a database. Sending a single object is much more efficient than sending several items individually, and it is easier to work with than an array, when you want to identify individual items by name.
+    </p>
+
+    <h1>Dot Notation</h1>
+    <p>
+        Above, you accessed the object's properties and methods using dot notation. The object name (person) acts as the <b>namespace</b> — it must be entered first to access anything encapsulated inside the object. Next you write a dot, then the item you want to access — this can be the name of a simple property, an item of an array property, or a call to one of the object's methods, for example:
+    </p>
+    <p>
+        person.age <br>
+        person.interests[1] <br>
+        person.bio() <br>
+    </p>
+
+    <h2>Sub-namespace</h2>
+    <p>
+        It is even possible to make the value of an object member another object. For example, try changing the name member from
+    </p>
+    <p>
+        name: ['Bob', 'Smith'],
+    </p>
+    <p>
+        to
+    </p>
+    <p>
+        name : { <br>
+            first: 'Bob', <br>
+            last: 'Smith' <br>
+        },
+    </p>
+    <p>
+        Here we are effectively creating a sub-namespace. This sounds complex, but really it's not — to access these items you just need to chain the extra step onto the end with another dot.
+    </p>
+    <p>
+        person.name.first <br>
+        person.name.last
+    </p>
+
+    <h1>Bracket Notation</h1>
+    <p>
+        There is another way to access object properties — using bracket notation. Instead of using these:
+    </p>
+    <p>
+        person.age <br>
+        person.name.first
+    </p>
+    <p>
+        You can use
+    </p>
+    <p>
+        person['age'] <br>
+        person['name']['first']
+    </p>
+    <p>
+        This looks very similar to how you access the items in an array, and it is basically the same thing — instead of using an index number to select an item, you are using the name associated with each member's value. It is no wonder that objects are sometimes called <b>associative arrays</b> — they map strings to values in the same way that arrays map numbers to values
+    </p>
+
+
+    <script>
+        const person = {
+            name: ['Bob', 'Smith'],
+            age: 32,
+            gender: 'male',
+            interests: ['music', 'skiing'],
+            bio : function(){
+                alert(this.name[0] + ' ' + this.name[1] + ' is ' + this.age + ' years old. He likes ' + this.interests[0] + ' and ' + this.interests[1] + '.');
+            },
+            greeting: function(){
+                alert('Hi! I\'m ' + this.name[0] + '.');
+            }
+        };
+        console.log(person.name);
+        console.log(person.name[0]);
+        console.log(person.age);
+        console.log(person.interests[1]);
+        console.log(person.bio());
+        console.log(person.greeting());
+    </script>
+</body>
+</html>

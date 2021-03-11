@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Test your Skills : Object Basics 1</title>
+</head>
+<body>
+    <h1>Object basics 1</h1>
+    <p class="para1"></p>
+    <p class="para2"></p>
+
+    <!-- Javascript Here -->
+    <script>
+        let para1 = document.querySelector('.para1');
+        let para2 = document.querySelector('.para2');
+
+        let cat = {
+            name: 'Bertie',
+            breed: 'Cymric',
+            color: 'white',
+            greeting: function(){
+                console.log('Meow!');
+            }
+        }
+
+        let catName = cat['name'];
+        cat.greeting();
+        cat.color = 'black';
+
+        para1.textContent = `The cat\'s name is ${catName}.`;
+        para2.textContent = `The cat\'s color is ${cat.color}`;
+
+    </script>
+</body>
+</html>

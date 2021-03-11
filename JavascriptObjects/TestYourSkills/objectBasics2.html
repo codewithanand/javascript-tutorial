@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test your Skills : Object Basics 2</title>
+
+    <style>
+        p {
+            color: purple;
+            margin: 0.5em 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Object Basics 2</h1>
+    <section class="preview">
+
+    </section>
+
+    <!-- Javascript here -->
+    <script>
+
+        let bandInfo = {
+            name: '4tyseven',
+            nationality: 'indian',
+            genre: 'rock',
+            members: 5,
+            formed: 2020,
+            split: false,
+            albums: ['First', 2020, 'Second', 2020]
+        }
+
+        let myBandInfo = `${bandInfo.name} is a ${bandInfo.members}-member ${bandInfo.nationality} band of ${bandInfo.genre}-genre that began in ${bandInfo.formed}. Their first album was ${bandInfo.albums[0]} released in ${bandInfo.albums[0+1]}. Their second album was ${bandInfo.albums[2]} released in ${bandInfo.albums[2+1]}.`
+
+        const section = document.querySelector('section');
+        let para1 = document.createElement('p');
+        para1.textContent = myBandInfo;
+        section.appendChild(para1);
+    </script>
+</body>
+</html>
