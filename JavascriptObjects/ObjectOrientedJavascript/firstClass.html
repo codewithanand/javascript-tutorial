@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating First Class</title>
+</head>
+<body>
+    <section>
+
+    </section>
+
+    <!-- Javascript here -->
+    <script>
+        //This is a constructor with argument
+        function Person(first, last, age, gender, interests){
+            //properties
+            this.name = {
+                first: first,
+                last: last
+            };
+            this.age = age;
+            this.gender = gender;
+            this.interests = interests;
+
+            //methods
+            this.bio = function(){
+                let interestString = '';
+                for(let i=0; i<this.interests.length; i++){
+                    if(this.interests.length === 1){
+                        interestString += this.interests[i];
+                    }
+                    else{
+                        if(i === this.interests.length-1){
+                            interestString += ' and ' + this.interests[i];
+                        }else if(i === 0){
+                            interestString += this.interests[i];
+                        }
+                        else{
+                            interestString += ', ' + this.interests[i];
+                        }
+                    }   
+                }
+
+                if(this.gender === 'male'){
+                    alert(this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. He likes ' + interestString + '.');
+                }
+                else{
+                    alert(this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. She likes ' + interestString + '.');
+                }
+            }
+            this.greeting = function(){
+                alert('Hi! I\'m ' + this.name.first + '.');
+            }
+        }
+
+        let person1 = new Person('Bob' , 'Smith', 32, 'male', ['music', 'skiing', 'dancing', 'painting']);
+        let person2 = new Person('Sarah', 'Lance', 30, 'female', ['music', 'dancing', 'singing', 'painting']);
+        let person3 = new Person('Oliver', 'Queen', 35, 'male', ['Archery']);
+
+        let section = document.querySelector('section');
+        let para1 = document.createElement('p');
+        let para2 = document.createElement('p');
+
+        para1.textContent = person1.name.first;
+        para2.textContent = person2.name.first;
+
+        person3.bio();
+
+        section.appendChild(para1);
+        section.appendChild(para2);
+
+    </script>
+</body>
+</html>
