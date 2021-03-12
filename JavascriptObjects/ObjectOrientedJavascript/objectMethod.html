@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating object using Object method</title>
+</head>
+<body>
+    <section>
+
+    </section>
+
+    <!-- Javascript here -->
+    <script>
+        let section = document.querySelector('section');
+        
+        //creating object using object() method
+        let person1 = new Object({
+            name: 'Chris',
+            age: 38,
+            greeting: function(){
+                alert('Hi! I\'m ' + this.name + ' and I\'m ' + this.age + ' yrs old.');
+            }
+        });
+
+        let para = document.createElement('p');
+        para.textContent = 'Hi! I\'m ' + person1.name + ' and I\'m ' + person1.age + ' yrs old.';
+        section.appendChild(para);
+
+        person1.greeting();
+    </script>
+</body>
+</html>

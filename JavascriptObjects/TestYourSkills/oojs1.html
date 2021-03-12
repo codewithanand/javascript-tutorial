@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Your Skills : OOJS1</title>
+</head>
+<body>
+    <section>
+
+    </section>
+
+
+    <!-- Javascript here -->
+    <script>
+        let section = document.querySelector('section');
+        
+        function Shape(name, sides, sideLength){
+            this.name = name;
+            this.sides = sides;
+            this.sideLength = sideLength;
+            this.calcPerimeter = function(){
+                this.perimeter = this.sides * this.sideLength;
+                return this.perimeter;
+            }
+        }
+
+        let square = new Shape('square', 4, 5);
+
+        let para = document.createElement('p');
+        para.textContent = 'Perimeter of ' + square.name + ' is : ' + square.calcPerimeter();
+        section.appendChild(para);
+    </script>
+</body>
+</html>

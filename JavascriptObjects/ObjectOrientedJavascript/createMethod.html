@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating object using Object method</title>
+</head>
+<body>
+    <section>
+
+    </section>
+
+    <!-- Javascript here -->
+    <script>
+        let section = document.querySelector('section');
+
+        //creating object using object() method
+        let person1 = new Object({
+            name: 'Chris',
+            age: 38,
+            greeting: function(){
+                alert('Hi! I\'m ' + this.name + ' and I\'m ' + this.age + ' yrs old.');
+            }
+        });
+
+        //Creating object using create() method
+        let person2 = Object.create(person1);
+        person2.name = 'Sarah';
+        person2.age = '30';
+
+        let para1 = document.createElement('p');
+        para1.textContent = 'Hi! I\'m ' + person1.name + ' and I\'m ' + person1.age + ' yrs old.';
+        section.appendChild(para1);
+
+        let para2 = document.createElement('p');
+        para2.textContent = 'Hi! I\'m ' + person2.name + ' and I\'m ' + person2.age + ' yrs old.';
+        section.appendChild(para2);
+
+        let para3 = document.createElement('p');
+        para3.textContent = 'Hi! I\'m ' + person1.name + ' and I\'m ' + person1.age + ' yrs old.';
+        section.appendChild(para3);
+
+    </script>
+</body>
+</html>
