@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting started with inheritance</title>
+</head>
+<body>
+    <section>
+
+    </section>
+
+    <!-- Javascript here -->
+    <script>
+        //This is a constructor with argument
+        function Person(first, last, age, gender, interests){
+            //properties
+            this.name = {
+                first: first,
+                last: last
+            };
+            this.age = age;
+            this.gender = gender;
+            this.interests = interests;
+
+            //methods
+            this.bio = function(){
+                let interestString = '';
+                for(let i=0; i<this.interests.length; i++){
+                    if(this.interests.length === 1){
+                        interestString += this.interests[i];
+                    }
+                    else{
+                        if(i === this.interests.length-1){
+                            interestString += ' and ' + this.interests[i];
+                        }else if(i === 0){
+                            interestString += this.interests[i];
+                        }
+                        else{
+                            interestString += ', ' + this.interests[i];
+                        }
+                    }   
+                }
+
+                if(this.gender === 'male' || this.gender === 'Male' || this.gender === 'm' || this.gender === 'M'){
+                    return this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. He likes ' + interestString + '.';
+                }
+                else{
+                    return this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. She likes ' + interestString + '.';
+                }
+            }
+            this.greeting = function(){
+                return 'Hi! I\'m ' + this.name.first + '.';
+            }
+        }
+
+        //Inheritance starts here
+        function Teacher(first, last, age, gender, interests, subject){
+            Person.call(this, first, last, age, gender, interests);
+            this.subject = subject;
+        }
+        Teacher.prototype = Object.create(Person.prototype);
+
+        Object.defineProperty(Teacher.prototype, 'constructor', {
+            value: Teacher,
+            enumerable: false, // so that it does not appear in 'for in' loop
+            writable: true 
+        });
+
+        Teacher.prototype.greeting = function() {
+            let prefix;
+
+            if (this.gender === 'male' || this.gender === 'Male' || this.gender === 'm' || this.gender === 'M') {
+                prefix = 'Mr.';
+            } else if (this.gender === 'female' || this.gender === 'Female' || this.gender === 'f' || this.gender === 'F') {
+                prefix = 'Ms.';
+            } else {
+                prefix = 'Mx.';
+            }
+
+            alert('Hello. My name is ' + prefix + ' ' + this.name.last + ', and I teach ' + this.subject + '.');
+        };
+
+        let person1 = new Person('Bob' , 'Smith', 32, 'male', ['music', 'skiing', 'dancing', 'painting']);
+        let teacher1 = new Teacher('Dave', 'Griffiths', 31, 'male', ['football', 'cookery'], 'mathematics');
+
+        let section = document.querySelector('section');
+        let para1 = document.createElement('p');
+        let para2 = document.createElement('p');
+        let para3 = document.createElement('p');
+
+        para1.textContent = person1.greeting();
+        para2.textContent = person1.bio();
+        para3.textContent = teacher1.greeting();
+
+        section.appendChild(para1);
+        section.appendChild(para2);
+        section.appendChild(para3);
+
+    </script>
+</body>
+</html>
