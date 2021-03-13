@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getters and Setters</title>
+</head>
+<body>
+    
+    <!-- Javascript here -->
+    <script>
+        class Person{
+            constructor(first, last, age, gender, interests){
+                this.name = {
+                    first: first,
+                    last: last
+                };
+                this.age = age;
+                this.gender = gender;
+                this.interests = interests;
+
+                this.greeting = function(){
+                    console.log(`Hi! I\'m ${this.name.first}`);
+                }
+
+                this.farewell = function(){
+                    console.log(`${this.name.first} has left the building. Bye for now!`);
+                }
+            }
+        }
+
+        class Teacher extends Person{
+            constructor(first, last, age, gender, interests, subject, grade){
+                super(first, last, age, gender, interests);
+                this._subject = subject;
+                this.grade = grade;
+            }
+
+            get subject(){
+                return this._subject;
+            }
+
+            set subject(newSubject){
+                this._subject = newSubject;
+            }
+        }
+
+        let han = new Person('Han', 'Solo', 25, 'male', ['Smuggling']);
+        han.greeting();
+
+        let leia = new Person('Leia', 'Organa', 19, 'female', ['Government']);
+        leia.farewell();
+
+        let snape = new Teacher('Serverus', 'Snape', 58, 'male', ['Potions'], 'Dark arts', 5);
+        snape.greeting();
+        snape.farewell();
+        console.log(snape.age);
+
+        console.log(snape.subject);
+        snape.subject = 'Balloon animals'; //sets _subject to "Balloon animals"
+        console.log(snape.subject); //returns "Balloon animals"
+    </script>
+</body>
+</html>

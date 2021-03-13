@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECMAScript 2015 Classes</title>
+</head>
+<body>
+    <h1>ECMAScript 2015 Classes</h1>
+    <p>
+        Unlike old-school constructor functions where the new operator does the initialization of this to a newly-allocated object, this isn't automatically initialized for a class defined by the extends keyword, i.e the sub-classes.
+    </p>
+    <p>
+        Therefore running the above code will give an error:
+    </p>
+    <p>
+        <b>Uncaught ReferenceError:</b> Must call <em>super</em> constructor <em>in</em> derived <em>class</em> before accessing <em>'this'</em> or returning <em>from</em> derived constructor
+    </p>
+    <p>
+        For sub-classes, the this initialization to a newly allocated object is always dependant on the parent class constructor, i.e the constructor function of the class from which you're extending.
+    </p>
+    <p>
+        Here we are extending the Person class — the Teacher sub-class is an extension of the Person class. So for Teacher, the this initialization is done by the Person constructor.
+    </p>
+    <p>
+        To call the parent constructor we have to use the super() operator, like so:
+    </p>
+    <p>
+        class Teacher extends Person { <br>
+            constructor(subject, grade) { <br>
+              super(); // Now 'this' is initialized by calling the parent constructor. <br>
+              this.subject = subject; <br>
+              this.grade = grade; <br>
+            } <br>
+        } <br>
+    </p>
+    <p>
+        Since the super() operator is actually the parent class constructor, passing it the necessary arguments of the Parent class constructor will also initialize the parent class properties in our sub-class, thereby inheriting it:
+    </p>
+    <p>
+        class Teacher extends Person { <br>
+            constructor(first, last, age, gender, interests, subject, grade) { <br>
+              super(first, last, age, gender, interests); <br>
+          
+              // subject and grade are specific to Teacher <br>
+              this.subject = subject; <br>
+              this.grade = grade; <br>
+            } <br>
+        } <br>
+    </p>
+
+    <section>
+
+    </section>
+
+    <!-- Javascript here -->
+    <script>
+        class Person{
+            constructor(first, last, age, gender, interests){
+                this.name = {
+                    first: first,
+                    last: last
+                };
+                this.age = age;
+                this.gender = gender;
+                this.interests = interests;
+
+                this.greeting = function(){
+                    console.log(`Hi! I\'m ${this.name.first}`);
+                }
+
+                this.farewell = function(){
+                    console.log(`${this.name.first} has left the building. Bye for now!`);
+                }
+            }
+        }
+
+        class Teacher extends Person{
+            constructor(first, last, age, gender, interests, subject, grade){
+                super(first, last, age, gender, interests);
+                this.subject = subject;
+                this.grade = grade;
+            }
+        }
+
+        let han = new Person('Han', 'Solo', 25, 'male', ['Smuggling']);
+        han.greeting();
+
+        let leia = new Person('Leia', 'Organa', 19, 'female', ['Government']);
+        leia.farewell();
+
+        let snape = new Teacher('Serverus', 'Snape', 58, 'male', ['Potions'], 'Dark arts', 5);
+        snape.greeting();
+        snape.farewell();
+        console.log(snape.age);
+        console.log(snape.subject);
+    </script>
+</body>
+</html>
