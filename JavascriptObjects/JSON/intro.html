@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+</head>
+<body>
+    <h1>Working with JSON</h1>
+    <p>
+        <b>JavaScript Object Notation (JSON)</b> is a standard text-based format for representing structured data based on JavaScript object syntax. It is commonly used for transmitting data in web applications (e.g., sending some data from the server to the client, so it can be displayed on a web page, or vice versa). You'll come across it quite often, so in this article we give you all you need to work with JSON using JavaScript, including parsing JSON so you can access data within it, and creating JSON.
+    </p>
+    <h2>What really is JSON?</h2>
+    <p>
+        JSON is a text-based data format following JavaScript object syntax, which was popularized by Douglas Crockford. Even though it closely resembles JavaScript object literal syntax, it can be used independently from JavaScript, and many programming environments feature the ability to read (parse) and generate JSON.
+    </p>
+    <p>
+        JSON exists as a string — useful when you want to transmit data across a network. It needs to be converted to a native JavaScript object when you want to access the data. This is not a big issue —  JavaScript provides a global JSON object that has methods available for converting between the two.
+    </p>
+    <p>
+        <em>
+            <b>Note:</b> Converting a string to a native object is called <b>deserialization</b>, while converting a native object to a string so it can be transmitted across the network is called <b>serialization</b>.
+        </em>
+    </p>
+    <p>
+        A JSON string can be stored in its own file, which is basically just a text file with an extension of <em>.json</em>, and a <em>MIME type</em> of <em>application/json</em>.
+    </p>
+    <h2>JSON structure</h2>
+    <p>
+        As described above, JSON is a string whose format very much resembles JavaScript object literal format. You can include the same basic data types inside JSON as you can in a standard JavaScript object — strings, numbers, arrays, booleans, and other object literals. This allows you to construct a data hierarchy, like so:
+    </p>
+    <p>
+        {<br>
+            "squadName": "Super hero squad",<br>
+            "homeTown": "Metro City",<br>
+            "formed": 2016,<br>
+            "secretBase": "Super tower",<br>
+            "active": true,<br>
+            "members": [<br>
+              {<br>
+                "name": "Molecule Man",<br>
+                "age": 29,<br>
+                "secretIdentity": "Dan Jukes",<br>
+                "powers": [<br>
+                  "Radiation resistance",<br>
+                  "Turning tiny",<br>
+                  "Radiation blast"<br>
+                ]<br>
+              },<br>
+              {<br>
+                "name": "Madame Uppercut",<br>
+                "age": 39,<br>
+                "secretIdentity": "Jane Wilson",<br>
+                "powers": [<br>
+                  "Million tonne punch",<br>
+                  "Damage resistance",<br>
+                  "Superhuman reflexes"<br>
+                ]<br>
+              },<br>
+              {<br>
+                "name": "Eternal Flame",<br>
+                "age": 1000000,<br>
+                "secretIdentity": "Unknown",<br>
+                "powers": [<br>
+                  "Immortality",<br>
+                  "Heat Immunity",<br>
+                  "Inferno",<br>
+                  "Teleportation",<br>
+                  "Interdimensional travel"<br>
+                ]<br>
+              }<br>
+            ] <br>
+          } <br>
+    </p>
+    <p>
+        If we loaded this string into a JavaScript program, parsed it into a variable called superHeroes for example, we could then access the data inside it using the same dot/bracket notation we looked at in the JavaScript object basics article. For example:
+    </p>
+    <p>
+        superHeroes.homeTown <br>
+        superHeroes['active']
+    </p>
+    <p>
+        To access data further down the hierarchy, you have to chain the required property names and array indexes together.  For example, to access the third superpower of the second hero listed in the members list, you'd do this:
+    </p>
+    <p>
+        superHeroes['members'][1]['powers'][2]
+    </p>
+    <p>
+        <ol>
+            <li>First we have the variable name — superHeroes.</li>
+            <li>Inside that we want to access the members property, so we use ["members"].</li>
+            <li>members contains an array populated by objects. We want to access the second object inside the array, so we use [1].</li>
+            <li>Inside this object, we want to access the powers property, so we use ["powers"].</li>
+            <li>
+                Inside the powers property is an array containing the selected hero's superpowers. We want the third one, so we use [2].
+            </li>
+        </ol>
+    </p>
+    <h2>Arrays as JSON</h2>
+    <p>
+        Above we mentioned that JSON text basically looks like a JavaScript object inside a string. We can also convert arrays to/from JSON. Below is also valid JSON, for example:
+    </p>
+   
+    <p>
+        [<br>
+            {<br>
+                "name": "Molecule Man",<br>
+                "age": 29,<br>
+                "secretIdentity": "Dan Jukes",<br>
+                "powers": [<br>
+                    "Radiation resistance",<br>
+                    "Turning tiny",<br>
+                    "Radiation blast"<br>
+                ]<br>
+            },<br>
+            {<br>
+                "name": "Madame Uppercut",<br>
+                "age": 39,<br>
+                "secretIdentity": "Jane Wilson",<br>
+                "powers": [<br>
+                    "Million tonne punch",<br>
+                    "Damage resistance",<br>
+                    "Superhuman reflexes"<br>
+                ]<br>
+            } <br>
+        ]
+    </p>
+    <p>
+        The above is perfectly valid JSON. You'd just have to access array items (in its parsed version) by starting with an array index, for example [0]["powers"][0].
+    </p>
+    <h2>Other notes</h2>
+    <p>
+        <ul>
+            <li>JSON is purely a string with a specified data format — it contains only properties, no methods.</li>
+            <li>JSON requires double quotes to be used around strings and property names. Single quotes are not valid other than surrounding the entire JSON string.</li>
+            <li>Even a single misplaced comma or colon can cause a JSON file to go wrong, and not work. You should be careful to validate any data you are attempting to use (although computer-generated JSON is less likely to include errors, as long as the generator program is working correctly). You can validate JSON using an application like <a href="http://http://jsonlint.com/">JSONLint</a>.</li>
+            <li>JSON can actually take the form of any data type that is valid for inclusion inside JSON, not just arrays or objects. So for example, a single string or number would be valid JSON.</li>
+            <li>Unlike in JavaScript code in which object properties may be unquoted, in JSON only quoted strings may be used as properties.</li>
+        </ul>
+    </p>
+    <h2>Obtaining the JSON</h2>
+    <p>
+        To obtain the JSON, we use an API called <b>XMLHttpRequest</b> (often called <b>XHR</b>). This is a very useful JavaScript object that allows us to make network requests to retrieve resources from a server via JavaScript (e.g. images, text, JSON, even HTML snippets), meaning that we can update small sections of content without having to reload the entire page. This has led to more responsive web pages, and sounds exciting.
+    </p>
+    <p>
+        <ol>
+            <li>To start with, we store the URL of the JSON we want to retrieve in a variable. <br>let requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';</li>
+            <li>To create a request, we need to create a new request object instance from the <b>XMLHttpRequest</b> constructor, using the <b>new</b> keyword. Add the following below your last line: <br> let request = new XMLHttpRequest();</li>
+            <li>Now we need to open the request using the <b>open()</b> method. Add the following line: <br> request.open('GET', requestURL); <br> This takes at least two parameters — there are other optional parameters available. We only need the two mandatory ones for this simple example: 
+                <ul>
+                    <li>The HTTP method to use when making the network request. In this case <b>GET</b> is fine, as we are just retrieving some simple data.</li>
+                    <li>The URL to make the request to — this is the URL of the JSON file that we stored earlier.</li>
+                </ul>
+            </li>
+            <li>Next, add the following two lines — here we are setting the <b>responseType</b> to JSON, so that XHR knows that the server will be returning JSON, and that this should be converted behind the scenes into a JavaScript object. Then we send the request with the <b>send()</b> method: <br> request.responseType = 'json'; <br> request.send();</li>
+            <li>The last bit of this section involves waiting for the response to return from the server, then dealing with it. Add the following code below your previous code: <br> request.onload = function() { <br>
+                const superHeroes = request.response; <br>
+                populateHeader(superHeroes); <br>
+                showHeroes(superHeroes); <br>
+              } </li>
+        </ol>
+    </p>
+    <h2>Populating the header</h2>
+    <p>
+        Now that we've retrieved the JSON data and converted it into a JavaScript object, let's make use of it by writing the two functions we referenced above. First of all, add the following function definition below the previous code:
+    </p>
+    <p>
+        function populateHeader(obj) { <br>
+            const myH1 = document.createElement('h1');<br>
+            myH1.textContent = obj['squadName'];<br>
+            header.appendChild(myH1);<br>
+          
+            const myPara = document.createElement('p');<br>
+            myPara.textContent = 'Hometown: ' + obj['homeTown'] + ' // Formed: ' + obj['formed'];<br>
+            header.appendChild(myPara);<br>
+          }<br>
+    </p>
+    <h2>Creating information cards</h2>
+    <p>
+        function showHeroes(obj) {<br>
+            const heroes = obj['members'];<br>
+          
+            for (let i = 0; i < heroes.length; i++) {<br>
+              const myArticle = document.createElement('article');<br>
+              const myH2 = document.createElement('h2');<br>
+              const myPara1 = document.createElement('p');<br>
+              const myPara2 = document.createElement('p');<br>
+              const myPara3 = document.createElement('p');<br>
+              const myList = document.createElement('ul');<br>
+          
+              myH2.textContent = heroes[i].name;<br>
+              myPara1.textContent = 'Secret identity: ' + heroes[i].secretIdentity;<br>
+              myPara2.textContent = 'Age: ' + heroes[i].age;<br>
+              myPara3.textContent = 'Superpowers:';<br>
+          
+              const superPowers = heroes[i].powers;<br>
+              for (let j = 0; j < superPowers.length; j++) {<br>
+                const listItem = document.createElement('li');<br>
+                listItem.textContent = superPowers[j];<br>
+                myList.appendChild(listItem);<br>
+              }<br>
+          
+              myArticle.appendChild(myH2);<br>
+              myArticle.appendChild(myPara1);<br>
+              myArticle.appendChild(myPara2);<br>
+              myArticle.appendChild(myPara3);<br>
+              myArticle.appendChild(myList);<br>
+          
+              section.appendChild(myArticle);<br>
+            }<br>
+          }<br>
+    </p>
+</body>
+</html>

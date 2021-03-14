@@ -33,10 +33,14 @@
             members: 5,
             formed: 2020,
             split: false,
-            albums: ['First', 2020, 'Second', 2020]
+            albums: [
+                {name : 'First', year: 2020},
+                {name : 'Second', year: 2020},
+                {name : 'Third', year: 2021}
+            ]
         }
 
-        let myBandInfo = `${bandInfo.name} is a ${bandInfo.members}-member ${bandInfo.nationality} band of ${bandInfo.genre}-genre that began in ${bandInfo.formed}. Their first album was ${bandInfo.albums[0]} released in ${bandInfo.albums[0+1]}. Their second album was ${bandInfo.albums[2]} released in ${bandInfo.albums[2+1]}.`
+        let myBandInfo = `${bandInfo.name} is a ${bandInfo.members}-member ${bandInfo.nationality} band of ${bandInfo.genre}-genre that began in ${bandInfo.formed}. Their first album was ${bandInfo['albums'][0]['name']} released in ${bandInfo['albums'][0]['year']}. Their second album was ${bandInfo['albums'][1]['name']} released in ${bandInfo['albums'][1]['year']}.`
 
         const section = document.querySelector('section');
         let para1 = document.createElement('p');
