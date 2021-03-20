@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The nature of asynchronous code</title>
+</head>
+<body>
+    
+
+    <!-- Javascript here -->
+    <script>
+        console.log('Starting...');
+        let image;
+        fetch('coffee.jpg')
+            .then((response)=>{
+                console.log('It worked!');
+                console.log(response);
+                return response.blob();
+            })
+            .then((myBlob)=>{
+                console.log(myBlob);
+                let objectURL = URL.createObjectURL(myBlob);
+                console.log(objectURL);
+                image = document.createElement('img');
+                image.src = objectURL;
+                document.body.appendChild(image);
+            })
+            .catch((err)=>{
+                console.log('There has been a problem with your fetch operation: ' + err.message);
+            });
+        console.log('All done!');
+    </script>
+</body>
+</html>
