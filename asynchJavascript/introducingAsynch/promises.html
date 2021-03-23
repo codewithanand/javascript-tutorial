@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+</head>
+<body>
+    <h1>Promises</h1>
+    <p>
+        Promises are the new style of async code that you'll see used in modern Web APIs. A good example is the fetch() API, which is basically like a modern, more efficient version of XMLHttpRequest. Let's look at a quick example, from our Fetching data from the server article:
+    </p>
+    <p>
+        Here we see fetch() taking a single parameter — the URL of a resource you want to fetch from the network — and returning a promise. The promise is an object representing the completion or failure of the async operation. It represents an intermediate state, as it were. In essence, it's the browser's way of saying "I promise to get back to you with the answer as soon as I can," hence the name "promise."
+    </p>
+
+    <!-- Javascript Here -->
+    <script>
+        fetch('products.json').then(function(response) {
+            return response.json();
+        }).then(function(json) {
+            let products = json;
+            // initialize(products);
+        }).catch(function(err) {
+            console.log('Fetch problem: ' + err.message);
+        });
+    </script>
+</body>
+</html>

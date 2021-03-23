@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xhr-async-callback</title>
+</head>
+<body>
+    <h1>XHR-Async-Callback</h1>
+    <p>
+        Here we create a displayImage() function that represents a blob passed to it as an object URL, then creates an image to display the URL in, appending it to the document's <body>. However, we then create a loadAsset() function that takes a callback as a parameter, along with a URL to fetch and a content type. It uses XMLHttpRequest (often abbreviated to "XHR") to fetch the resource at the given URL, then pass the response to the callback to do something with. In this case the callback is waiting on the XHR call to finish downloading the resource (using the onload event handler) before it passes it to the callback.
+    </p>
+    <p>
+        Callbacks are versatile — not only do they allow you to control the order in which functions are run and what data is passed between them, they also allow you to pass data to different functions depending on circumstance. So you could have different actions to run on the response downloaded, such as processJSON(), displayText(), etc.
+    </p>
+    <p>
+        <b>Note</b> that not all callbacks are async — some run synchronously. An example is when we use Array.prototype.forEach() to loop through the items in an array
+    </p>
+    <p>
+        const gods = ['Apollo', 'Artemis', 'Ares', 'Zeus'];<br>
+        gods.forEach(function (eachName, index){<br>
+        console.log(index + '. ' + eachName);<br>
+        });
+    </p>
+    <p>
+        In this example we loop through an array of Greek gods and print the index numbers and values to the console. The expected parameter of forEach() is a callback function, which itself takes two parameters, a reference to the array name and index values. However, it doesn't wait for anything — it runs immediately.
+    </p>
+
+    <!-- Javascript here -->
+    <script>
+        function loadAsset(url, type, callback) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.responseType = type;
+
+            xhr.onload = function() {
+                callback(xhr.response);
+            };
+
+            xhr.send();
+        }
+
+        function displayImage(blob) {
+            let objectURL = URL.createObjectURL(blob);
+
+            let image = document.createElement('img');
+            image.src = objectURL;
+            document.body.appendChild(image);
+        }
+
+        loadAsset('coffee.jpg', 'blob', displayImage);
+    </script>
+</body>
+</html>
