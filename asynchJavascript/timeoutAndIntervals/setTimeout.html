@@ -7,10 +7,39 @@
     <title>setTimeout()</title>
 </head>
 <body>
+    <h1>Greeter App</h1>
+    <form>
+        <label for="name">Enter a name: </label>
+        <input type="text" class="name"><br>
+        <button class="greet">Greet!</button><br>
+        <button class="cancel">Cancel greeting</button><br>
+    </form>
     
     <!-- Javascript here -->
     <script>
-        
+        let input = document.querySelector('.name');
+        let greetBtn = document.querySelector('.greet');
+        let cancelBtn = document.querySelector('.cancel');
+        let myGreeting;
+
+        cancelBtn.disabled = true;
+
+        greetBtn.addEventListener('click' , greeting);
+
+        function greeting(){
+            cancelBtn.disabled = false;
+            myGreeting = setTimeout(sayHi, 5000, input.value);
+        }
+
+        function sayHi(who){
+            alert(`Hello! ${who}`);
+            cancelBtn.disabled = true;
+        }
+
+        cancelBtn.addEventListener('click', ()=>{
+            clearTimeout(myGreeting);
+            cancelBtn.disabled = true;
+        });
     </script>
 </body>
 </html>

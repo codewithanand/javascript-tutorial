@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Learning : StopWatch</title>
+    <style>
+        .clock{
+            background-color: blueviolet;
+            color: cornsilk;
+            font-size: 30px;
+            width: 110px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>StopWatch</h1>
+    <p class="clock">00:00:00</p>
+    <button id="start-Btn">Start</button>
+    <button id="stop-Btn" disabled>Stop</button>
+    <button id="reset-Btn" disabled>Reset</button>
+    <!-- Javascript here -->
+    <script>
+        const startBtn = document.querySelector('#start-Btn');
+        const stopBtn = document.querySelector('#stop-Btn');
+        const resetBtn = document.querySelector('#reset-Btn');
+
+        let myClock = document.querySelector('.clock');
+        let secondCount = 0;
+        let stopWatch;
+
+        function displayTime() {
+            let hours = Math.floor(secondCount/3600);
+            let minutes = Math.floor((secondCount%3600)/60);
+            let seconds = Math.floor(secondCount%60);
+
+            hours = (hours<10) ? '0' + hours : hours;
+            minutes = (minutes<10) ? '0' + minutes : minutes;
+            seconds = (seconds<10) ? '0' + seconds : seconds;
+    
+            myClock.textContent = hours + ':' + minutes + ':' + seconds;
+
+            secondCount++;
+        } 
+
+        startBtn.addEventListener('click' , ()=>{
+            stopWatch = setInterval(displayTime, 1000);
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+            resetBtn.disabled = false;
+        });
+
+        stopBtn.addEventListener('click' , ()=>{
+            clearInterval(stopWatch);
+            startBtn.disabled = false;
+        });
+
+        resetBtn.addEventListener('click' , ()=>{
+            clearInterval(stopWatch);
+            secondCount = 0;
+            startBtn.disabled = false;
+            displayTime();
+        });
+
+    </script>
+</body>
+</html>
