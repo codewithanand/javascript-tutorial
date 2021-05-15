@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List</title>
+    <style>
+        li{
+            margin-bottom: 10px;
+        }
+        span{
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Shopping List</h1>
+    <form action="">
+        <label for="inputItem"></label>
+        <input type="text" name="inputItem" id="inputItem">
+        <button type="button" id="add-btn">Add item</button>
+    </form>
+    <ul>
+
+    </ul>
+
+    <!-- Javascript here -->
+    <script>
+        let input = document.querySelector('#inputItem');
+        let add = document.querySelector('#add-btn');
+        let list = document.querySelector('ul');
+
+        add.addEventListener('click', addItems);
+
+        function addItems(){
+            let listItem = document.createElement('li');
+            let span = document.createElement('span');
+            let del = document.createElement('button');
+
+            del.setAttribute('id', 'del-btn');
+            del.addEventListener('click', ()=>{
+                listItem.remove();
+            });
+
+            span.textContent = input.value;
+            del.textContent = 'Delete';
+
+            listItem.appendChild(span);
+            listItem.appendChild(del);
+            list.appendChild(listItem);
+
+            input.value = '';
+            input.focus();
+        }
+    </script>
+</body>
+</html>
