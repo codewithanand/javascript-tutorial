@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Map - Mapquest</title>
+    <style>
+        #map {
+            width: 600px;
+            height: 600px;
+        }
+    </style>
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
+</head>
+
+<body>
+    <h1>Simple Mapquest example</h1>
+
+    <div id="map"></div>
+
+    <script>
+        var L;
+        window.onload = function () {
+            L.mapquest.key = 'zwf3SzsgZkVAvcncIy5GVnH9TPheaCu7';
+
+            // 'map' refers to a <div> element with the ID map
+            var map = L.mapquest.map('map', {
+                center: [23.35133802065101, 85.30552123621742],
+                layers: L.mapquest.tileLayer('map'),
+                zoom: 13
+            });
+        }
+    </script>
+</body>
+
+</html>
