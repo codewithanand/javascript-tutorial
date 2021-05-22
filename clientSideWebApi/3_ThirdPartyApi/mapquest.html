@@ -27,11 +27,26 @@
             L.mapquest.key = 'zwf3SzsgZkVAvcncIy5GVnH9TPheaCu7';
 
             // 'map' refers to a <div> element with the ID map
+            // tileLayer can have 'map', 'satellite', 'hybrid', 'dark' and 'light'
             var map = L.mapquest.map('map', {
-                center: [23.35133802065101, 85.30552123621742],
-                layers: L.mapquest.tileLayer('map'),
+                center: [23.356171, 85.237563],
+                layers: L.mapquest.tileLayer('hybrid'),
                 zoom: 13
             });
+
+            //Map control bar positioned bottom right
+            map.addControl(L.mapquest.control({ position: 'bottomright' }));
+
+            //Setting marker
+            L.marker([23.356171, 85.237563], {
+                icon: L.mapquest.icons.marker({
+                    primaryColor: '#22407F',
+                    secondaryColor: '#3B5998',
+                    shadow: true,
+                    size: 'md',
+                    symbol: 'H'
+                })
+            }).bindPopup('This is my Home!').addTo(map);
         }
     </script>
 </body>
